@@ -1,0 +1,235 @@
+.export-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background-color: #0f1a2b;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 120, 255, 0.5), 0 0 40px rgba(0, 0, 0, 0.3);
+    width: 500px;
+    max-width: 90vw;
+    z-index: 1000;
+    opacity: 0;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 120, 255, 0.3);
+    overflow: hidden;
+}
+
+.export-popup.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.export-popup.hide {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+}
+
+.export-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.export-header h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-btn:hover {
+    color: #fff;
+}
+
+.export-body {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.export-option {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 1px solid transparent;
+}
+
+.export-option:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+}
+
+.export-option[data-format="pdf"] {
+    border-color: rgba(255, 59, 48, 0.3);
+}
+
+.export-option[data-format="pdf"]:hover {
+    box-shadow: 0 0 15px rgba(255, 59, 48, 0.3);
+}
+
+.export-option[data-format="excel"] {
+    border-color: rgba(40, 205, 65, 0.3);
+}
+
+.export-option[data-format="excel"]:hover {
+    box-shadow: 0 0 15px rgba(40, 205, 65, 0.3);
+}
+
+.export-option[data-format="csv"] {
+    border-color: rgba(0, 122, 255, 0.3);
+}
+
+.export-option[data-format="csv"]:hover {
+    box-shadow: 0 0 15px rgba(0, 122, 255, 0.3);
+}
+
+.export-option[data-format="image"] {
+    border-color: rgba(175, 82, 222, 0.3);
+}
+
+.export-option[data-format="image"]:hover {
+    box-shadow: 0 0 15px rgba(175, 82, 222, 0.3);
+}
+
+.export-option i {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.export-option[data-format="pdf"] i {
+    color: #ff3b30;
+}
+
+.export-option[data-format="excel"] i {
+    color: #28cd41;
+}
+
+.export-option[data-format="csv"] i {
+    color: #007aff;
+}
+
+.export-option[data-format="image"] i {
+    color: #af52de;
+}
+
+.export-option span {
+    font-weight: 500;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.export-option p {
+    margin: 0;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* 通知樣式 */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #0f1a2b;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 15px;
+    display: flex;
+    align-items: flex-start;
+    width: 300px;
+    max-width: calc(100vw - 40px);
+    transform: translateX(120%);
+    transition: transform 0.3s ease;
+    z-index: 1001;
+    border-left: 4px solid #007aff;
+}
+
+.notification-success {
+    border-left-color: #28cd41;
+}
+
+.notification-error {
+    border-left-color: #ff3b30;
+}
+
+.notification-info {
+    border-left-color: #007aff;
+}
+
+.notification-show {
+    transform: translateX(0);
+}
+
+.notification-hiding {
+    transform: translateX(120%);
+}
+
+.notification-icon {
+    margin-right: 12px;
+    font-size: 20px;
+    color: #007aff;
+}
+
+.notification-success .notification-icon {
+    color: #28cd41;
+}
+
+.notification-error .notification-icon {
+    color: #ff3b30;
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.notification-message {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    padding: 0;
+    margin-left: 10px;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.notification-close:hover {
+    color: #fff;
+}
+
+/* 移動設備適配 */
+@media (max-width: 768px) {
+    .export-body {
+        grid-template-columns: 1fr;
+    }
+}

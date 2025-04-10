@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/features.css">
     <link rel="stylesheet" href="css/menu-button.css">
     <link rel="stylesheet" href="css/refresh-button.css">
+    <link rel="stylesheet" href="css/export-button.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -177,6 +178,68 @@
                 </div>
             </div>
             
+            <!-- 最新IPO詳情 -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title">最新IPO詳情</h2>
+                    <div class="card-actions">
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-filter"></i>
+                            篩選
+                        </button>
+                        <button class="card-action">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>公司名稱</th>
+                                    <th>股票代碼</th>
+                                    <th>法律顧問</th>
+                                    <th>審計師</th>
+                                    <th>承銷商</th>
+                                    <th>募資金額</th>
+                                    <th>IPO價格</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>TechVision Inc.</td>
+                                    <td>TVSI</td>
+                                    <td>Latham & Watkins</td>
+                                    <td>Deloitte</td>
+                                    <td>Morgan Stanley</td>
+                                    <td>$220M</td>
+                                    <td>$22.00</td>
+                                </tr>
+                                <tr>
+                                    <td>GreenEnergy Solutions</td>
+                                    <td>GESO</td>
+                                    <td>Skadden, Arps</td>
+                                    <td>PwC</td>
+                                    <td>Goldman Sachs</td>
+                                    <td>$92.5M</td>
+                                    <td>$18.50</td>
+                                </tr>
+                                <tr>
+                                    <td>HealthTech Innovations</td>
+                                    <td>HTIV</td>
+                                    <td>Davis Polk</td>
+                                    <td>KPMG</td>
+                                    <td>JP Morgan</td>
+                                    <td>$77.25M</td>
+                                    <td>$15.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
             <!-- SEC規則變更 -->
             <div class="dashboard-card" id="sec-updates">
                 <div class="card-header">
@@ -342,5 +405,6 @@
     <script src="js/dashboard.js"></script>
     <script src="js/features.js"></script>
     <script src="js/refresh-button.js"></script>
+    <script src="js/export-button.js"></script>
 </body>
 </html>
