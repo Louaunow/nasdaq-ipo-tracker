@@ -3,263 +3,319 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>納斯達克IPO每日更新</title>
-    <link rel="stylesheet" href="css/tesla-style.css">
+    <title>納斯達克IPO資訊儀表板</title>
+    <link rel="stylesheet" href="css/dashboard-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <header>
-        <a href="index-tesla.html" class="logo">
-            <i class="fas fa-chart-line"></i>
-            <span>NASDAQ IPO</span>
-        </a>
-        <nav>
-            <ul>
-                <li><a href="#latest">最新更新</a></li>
-                <li><a href="#archives">歷史記錄</a></li>
-                <li><a href="#performance">表現分析</a></li>
-                <li><a href="#about">關於我們</a></li>
-            </ul>
-        </nav>
-        <button class="mobile-nav-toggle">
-            <i class="fas fa-bars"></i>
-        </button>
-    </header>
-    
-    <section class="hero" id="latest">
-        <div class="section-background" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/stock_market_red.webp'); background-size: cover; background-position: center;"></div>
-        <div class="hero-content">
-            <div>
-                <h1 class="hero-title">納斯達克IPO每日更新</h1>
-                <p class="hero-subtitle">每日更新納斯達克新上市股票資訊和SEC規則變更</p>
+    <div class="container">
+        <!-- 側邊欄 -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <a href="index-dashboard.html" class="sidebar-logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span>NASDAQ IPO</span>
+                </a>
             </div>
-            <div class="hero-buttons">
-                <a href="daily-tesla.html" class="btn btn-primary">查看今日更新</a>
-                <a href="pdf/nasdaq_ipo_report_2025-04-09.pdf" class="btn btn-secondary" download><i class="fas fa-file-pdf"></i> 下載PDF報告</a>
-            </div>
-        </div>
-    </section>
-    
-    <section class="ipo-section" id="archives">
-        <div class="section-background" style="background: linear-gradient(rgba(23, 26, 32, 0.9), rgba(23, 26, 32, 0.9)), url('images/stock_market_chart.jpeg'); background-size: cover; background-position: center; opacity: 0.2;"></div>
-        <div class="section-content">
-            <h2 class="section-title">最新更新: 2025年04月09日</h2>
-            <p class="section-subtitle">查看最新的納斯達克IPO資訊和SEC規則變更</p>
             
-            <div class="card-grid">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">今日IPO資訊</h3>
-                        <p class="card-subtitle">2025年04月09日</p>
-                    </div>
-                    <div class="card-body">
-                        <p>查看今日納斯達克新上市股票的詳細資訊，包括股票名稱、代碼、法律顧問、審計師、承銷商、募資金額和每股IPO價格。</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="daily-tesla.html" class="btn btn-outline">查看詳情</a>
-                    </div>
+            <div class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">主要導航</div>
+                    <ul class="nav-items">
+                        <li class="nav-item">
+                            <a href="index-dashboard.html" class="nav-link active">
+                                <i class="fas fa-home"></i>
+                                儀表板
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="daily-dashboard.html" class="nav-link">
+                                <i class="fas fa-calendar-day"></i>
+                                今日更新
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-history"></i>
+                                歷史記錄
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-chart-bar"></i>
+                                表現分析
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">SEC規則變更</h3>
-                        <p class="card-subtitle">最新法規更新</p>
-                    </div>
-                    <div class="card-body">
-                        <p>了解SEC關於IPO的最新規則和法規變更，包括提議中的規則和最終規則。</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="daily-tesla.html#sec-rules" class="btn btn-outline">查看詳情</a>
-                    </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">資料與報告</div>
+                    <ul class="nav-items">
+                        <li class="nav-item">
+                            <a href="#sec-updates" class="nav-link">
+                                <i class="fas fa-file-alt"></i>
+                                SEC規則變更
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#charts" class="nav-link">
+                                <i class="fas fa-chart-pie"></i>
+                                數據視覺化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pdf/nasdaq_ipo_report_2025-04-09.pdf" class="nav-link">
+                                <i class="fas fa-file-pdf"></i>
+                                PDF報告
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">IPO數據視覺化</h3>
-                        <p class="card-subtitle">圖表和分析</p>
-                    </div>
-                    <div class="card-body">
-                        <p>通過精美的圖表和視覺化數據，了解納斯達克IPO的趨勢和模式。</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="daily-tesla.html#charts" class="btn btn-outline">查看圖表</a>
-                    </div>
-                </div>
-            </div>
-            
-            <h2 class="section-title">歷史記錄</h2>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>日期</th>
-                            <th>IPO數量</th>
-                            <th>總募資金額</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>2025年04月09日</td>
-                            <td>3</td>
-                            <td>$389,750,000</td>
-                            <td><a href="daily-tesla.html" class="btn btn-outline">查看詳情</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-    
-    <section class="performance-section" id="performance">
-        <div class="section-background" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/stock_market_blue.webp'); background-size: cover; background-position: center;"></div>
-        <div class="section-content">
-            <h2 class="section-title">IPO表現分析</h2>
-            <p class="section-subtitle">分析上一月每隻於納斯達克IPO上市的個股表現</p>
-            
-            <div class="performance-grid">
-                <div class="performance-card">
-                    <div class="performance-header">
-                        <h3 class="performance-title">2025年3月表現概覽</h3>
-                        <p class="performance-subtitle">月度綜合報表</p>
-                    </div>
-                    <div class="performance-body">
-                        <div class="performance-stat">
-                            <span class="performance-label">IPO總數</span>
-                            <span class="performance-value">12</span>
-                        </div>
-                        <div class="performance-stat">
-                            <span class="performance-label">平均首日漲幅</span>
-                            <span class="performance-value positive">+18.5%</span>
-                        </div>
-                        <div class="performance-stat">
-                            <span class="performance-label">平均月度漲幅</span>
-                            <span class="performance-value positive">+12.3%</span>
-                        </div>
-                        <div class="performance-stat">
-                            <span class="performance-label">表現最佳股票</span>
-                            <span class="performance-value">TECH</span>
-                        </div>
-                        <a href="performance/march_2025.html" class="btn btn-outline">查看詳情</a>
-                    </div>
-                </div>
-                
-                <div class="performance-card">
-                    <div class="performance-header">
-                        <h3 class="performance-title">月度表現報告</h3>
-                        <p class="performance-subtitle">下載完整分析</p>
-                    </div>
-                    <div class="performance-body">
-                        <p>下載包含詳細分析和圖表的月度IPO表現報告，了解市場趨勢和投資機會。</p>
-                        <a href="nasdaq_ipo_performance_2025_03.pdf" class="btn btn-download" download><i class="fas fa-file-pdf"></i> 下載報告</a>
-                    </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">設置</div>
+                    <ul class="nav-items">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-info-circle"></i>
+                                關於我們
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </section>
-    
-    <section class="half-height" id="about">
-        <div class="section-content">
-            <h2 class="section-title">關於我們</h2>
-            <p class="section-subtitle">提供最新、最準確的納斯達克IPO資訊</p>
-            
-            <p style="text-align: center; margin-bottom: 30px;">
-                我們致力於提供最新、最準確的納斯達克IPO資訊，幫助投資者了解市場動態和投資機會。
-                我們的數據來源包括納斯達克官方網站和SEC EDGAR系統，確保資訊的權威性和準確性。
-            </p>
-            
-            <div style="text-align: center;">
-                <a href="#latest" class="btn btn-primary">返回頂部</a>
-            </div>
-        </div>
-    </section>
-    
-    <footer>
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="index-tesla.html">首頁</a>
-                <a href="daily-tesla.html">今日更新</a>
-                <a href="#archives">歷史記錄</a>
-                <a href="#performance">表現分析</a>
-                <a href="#about">關於我們</a>
-            </div>
-            <p class="footer-copyright">&copy; 2025 納斯達克IPO更新. 資料來源: 納斯達克官方網站和SEC EDGAR系統.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Add scrolled class to header when scrolling
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
         
-        // Mobile navigation toggle
-        const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
-        const nav = document.querySelector('nav');
-        
-        if (mobileNavToggle) {
-            mobileNavToggle.addEventListener('click', function() {
-                nav.classList.toggle('mobile-nav-active');
+        <!-- 主要內容 -->
+        <div class="main-content">
+            <!-- 頂部欄 -->
+            <div class="top-bar">
+                <h1 class="page-title">納斯達克IPO資訊儀表板</h1>
                 
-                // Change icon based on menu state
-                const icon = this.querySelector('i');
-                if (nav.classList.contains('mobile-nav-active')) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                } else {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            });
-        }
-        
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop,
-                        behavior: 'smooth'
-                    });
+                <div class="top-bar-actions">
+                    <div class="search-bar">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="搜索IPO資訊...">
+                    </div>
                     
-                    // Close mobile menu if open
-                    if (nav.classList.contains('mobile-nav-active')) {
-                        nav.classList.remove('mobile-nav-active');
-                        const icon = mobileNavToggle.querySelector('i');
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }
-                }
-            });
-        });
-        
-        // Add fade-in animation to elements when they come into view
-        const fadeElements = document.querySelectorAll('.card, .performance-card, .chart-container');
-        
-        const fadeInObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                    fadeInObserver.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-        
-        fadeElements.forEach(element => {
-            fadeInObserver.observe(element);
-        });
-    </script>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-sync-alt"></i>
+                        刷新數據
+                    </button>
+                    
+                    <button class="btn btn-primary">
+                        <i class="fas fa-download"></i>
+                        導出
+                    </button>
+                </div>
+            </div>
+            
+            <!-- IPO概覽 -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title">今日IPO概覽</h2>
+                    <div class="card-actions">
+                        <span class="badge" style="background-color: rgba(0, 200, 255, 0.15); color: var(--accent-blue); padding: 5px 10px; border-radius: 20px; font-size: 0.8rem;">
+                            <i class="fas fa-clock"></i> 最後更新: 2025-04-09
+                        </span>
+                        <button class="card-action">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="metric-grid">
+                        <div class="metric-card">
+                            <div class="metric-title">今日IPO數量</div>
+                            <div class="metric-value">3</div>
+                            <div class="metric-change positive">
+                                <i class="fas fa-arrow-up"></i> +1 較昨日
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-title">總募資金額</div>
+                            <div class="metric-value">$389.7M</div>
+                            <div class="metric-change positive">
+                                <i class="fas fa-arrow-up"></i> +$120M 較昨日
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-title">平均IPO價格</div>
+                            <div class="metric-value">$18.5</div>
+                            <div class="metric-change negative">
+                                <i class="fas fa-arrow-down"></i> -$2.3 較昨日
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="metric-title">本月IPO總數</div>
+                            <div class="metric-value">12</div>
+                            <div class="metric-change positive">
+                                <i class="fas fa-arrow-up"></i> +3 較上月
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SEC規則變更 -->
+            <div class="dashboard-card" id="sec-updates">
+                <div class="card-header">
+                    <h2 class="card-title">SEC規則變更</h2>
+                    <div class="card-actions">
+                        <button class="card-action">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="notification-card opportunity">
+                        <div class="notification-header">
+                            <div class="notification-title">
+                                <span class="status-tag opportunity">新規則</span>
+                                IPO定價透明度要求
+                            </div>
+                            <div class="notification-time">2025-04-08</div>
+                        </div>
+                        <div class="notification-content">
+                            SEC發布新規則，要求承銷商提供更詳細的IPO定價方法說明，增加定價過程透明度。該規則將於2025年7月1日生效，適用於所有新的IPO申請。
+                        </div>
+                        <div class="notification-footer">
+                            <span>來源: SEC官方網站</span>
+                            <a href="#" class="btn btn-outline">查看詳情</a>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-card risk">
+                        <div class="notification-header">
+                            <div class="notification-title">
+                                <span class="status-tag risk">提議規則</span>
+                                SPAC併購披露增強
+                            </div>
+                            <div class="notification-time">2025-04-05</div>
+                        </div>
+                        <div class="notification-content">
+                            SEC提議增強SPAC併購交易的披露要求，包括更詳細的財務預測和風險因素。該提議目前處於公眾評論期，預計將於2025年第三季度最終確定。
+                        </div>
+                        <div class="notification-footer">
+                            <span>來源: SEC EDGAR系統</span>
+                            <a href="#" class="btn btn-outline">查看詳情</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 數據視覺化 -->
+            <div class="dashboard-grid" id="charts">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2 class="card-title">IPO行業分佈</h2>
+                        <div class="card-actions">
+                            <button class="card-action">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="industry-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2 class="card-title">IPO募資金額趨勢</h2>
+                        <div class="card-actions">
+                            <button class="card-action">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="funding-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 最新IPO詳情 -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title">最新IPO詳情</h2>
+                    <div class="card-actions">
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-filter"></i>
+                            篩選
+                        </button>
+                        <button class="card-action">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>公司名稱</th>
+                                <th>股票代碼</th>
+                                <th>法律顧問</th>
+                                <th>審計師</th>
+                                <th>承銷商</th>
+                                <th>募資金額</th>
+                                <th>IPO價格</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>TechVision Inc.</td>
+                                <td>TVSI</td>
+                                <td>Latham & Watkins</td>
+                                <td>Deloitte</td>
+                                <td>Morgan Stanley</td>
+                                <td>$220M</td>
+                                <td>$22.00</td>
+                            </tr>
+                            <tr>
+                                <td>GreenEnergy Solutions</td>
+                                <td>GESO</td>
+                                <td>Skadden, Arps</td>
+                                <td>PwC</td>
+                                <td>Goldman Sachs</td>
+                                <td>$92.5M</td>
+                                <td>$18.50</td>
+                            </tr>
+                            <tr>
+                                <td>HealthTech Innovations</td>
+                                <td>HTIV</td>
+                                <td>Davis Polk</td>
+                                <td>KPMG</td>
+                                <td>JP Morgan</td>
+                                <td>$77.25M</td>
+                                <td>$15.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 移動端導航切換按鈕 -->
+    <button class="mobile-nav-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- 主題切換按鈕 -->
+    <div class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </div>
+    
+    <script src="js/dashboard.js"></script>
 </body>
 </html>
