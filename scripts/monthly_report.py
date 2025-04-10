@@ -5,9 +5,14 @@
 """
 
 import os
+import sys
 import datetime
 import calendar
-from scripts.history_storage import IPOHistoryStorage
+
+# 使用直接相對導入
+current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, current_dir)
+from history_storage import IPOHistoryStorage
 
 def generate_monthly_report(base_dir=None, year_month=None):
     """
@@ -18,7 +23,7 @@ def generate_monthly_report(base_dir=None, year_month=None):
         year_month: 年月字符串，格式為YYYY-MM，如果為None則使用上個月
     
     Returns:
-        str: 月度報表路徑
+        str: 月度報表路徑，如果沒有找到IPO資訊則返回None
     """
     if base_dir is None:
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,6 +39,11 @@ def generate_monthly_report(base_dir=None, year_month=None):
     
     # 生成月度報表
     report_path = storage.generate_monthly_report(year_month)
+    
+    # 如果沒有找到IPO資訊，則直接返回
+    if report_path is None:
+        print(f"沒有找到{year_month}的IPO資訊，跳過網站更新")
+        return None
     
     # 更新網站以包含月度報表
     update_website_for_monthly_report(base_dir, year_month, report_path)
@@ -287,5 +297,14 @@ def update_css_for_monthly_reports(website_dir):
 
 if __name__ == "__main__":
     # 如果直接執行此腳本，生成上個月的月度報表
-    report_path = generate_monthly_report()
-    print(f"月度報表已生成: {report_path}")
+    try:
+        report_path = generate_monthly_report()
+        if report_path:
+            print(f"月度報表已生成: {report_path}")
+        else:
+            print("沒有足夠的IPO資訊來生成月度報表")
+    except Exception as e:
+        print(f"生成月度報表時發生錯誤: {e}")
+        # 在GitHub Actions中，我們希望腳本不會因為無法生成月度報表而失敗
+        # 所以這裡捕獲異常但不重新拋出
+        print("繼續執行其他任務...")
