@@ -358,57 +358,29 @@
                 </div>
             </div>
             
-            <!-- 數據視覺化 -->
-            <div class="dashboard-grid" id="charts">
-                <div class="dashboard-card">
-                    <div class="card-header">
-                        <h2 class="card-title">IPO行業分佈</h2>
-                        <div class="card-actions">
-                            <button class="card-action">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="center-icon">
-                            <i class="fas fa-chart-pie"></i>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="industry-chart"></canvas>
-                        </div>
+            <!-- IPO行業分佈 -->
+            <div class="dashboard-card" id="charts">
+                <div class="card-header">
+                    <h2 class="card-title">IPO行業分佈</h2>
+                    <div class="card-actions">
+                        <button class="card-action">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
                     </div>
                 </div>
-                
-                <div class="dashboard-card">
-                    <div class="card-header">
-                        <h2 class="card-title">IPO募資金額趨勢</h2>
-                        <div class="card-actions">
-                            <button class="card-action">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="center-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
+                <div class="card-body">
+                    <div class="chart-grid">
                         <div class="chart-container">
-                            <canvas id="funding-chart"></canvas>
+                            <canvas id="industry-distribution-chart"></canvas>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <canvas id="funding-trend-chart"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- 移動端導航切換按鈕 -->
-    <button class="mobile-nav-toggle">
-        <i class="fas fa-bars"></i>
-    </button>
-    
-    <!-- 主題切換按鈕 -->
-    <div class="theme-toggle">
-        <i class="fas fa-moon"></i>
     </div>
     
     <!-- 估值方法說明模態框 -->
@@ -429,30 +401,24 @@
             
             <div class="valuation-modal-section">
                 <h4>優點</h4>
-                <ul class="pros-cons-list" id="modal-pros">
-                </ul>
+                <ul class="pros-cons-list" id="modal-pros"></ul>
             </div>
             
             <div class="valuation-modal-section">
                 <h4>缺點</h4>
-                <ul class="pros-cons-list" id="modal-cons">
-                </ul>
+                <ul class="pros-cons-list" id="modal-cons"></ul>
             </div>
             
             <div class="valuation-modal-section" id="industry-notes-section">
                 <h4>行業特性</h4>
-                <div id="modal-industry-notes">
-                </div>
+                <div id="modal-industry-notes"></div>
             </div>
         </div>
     </div>
     
-    <script src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript -->
     <script src="js/dashboard.js"></script>
-    <script src="js/features.js"></script>
     <script src="js/refresh-button.js"></script>
-    <script src="js/export-button.js"></script>
     <script src="js/industry_valuation.js"></script>
 </body>
 </html>
