@@ -6,15 +6,31 @@ on:
     - cron: '0 2 * * *'
   workflow_dispatch:  # 允許手動觸發
 
+# 添加明確的權限設定
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# 允許一個並發部署
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   update-ipo-info:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: 檢出代碼
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # 獲取完整歷史記錄
 
       - name: 設置Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
@@ -25,7 +41,7 @@ jobs:
 
       - name: 收集IPO資訊並生成報告
         run: |
-          python scripts/generate_pdf_report.py
+          python scripts/generate_pdf_report.py || echo "報告生成失敗，但繼續執行"
 
       - name: 儲存每日資訊
         run: |
@@ -37,25 +53,30 @@ jobs:
           mkdir -p history/$DATE
           mkdir -p history/$DATE/charts
           # 複製今日生成的文件到歷史目錄
-          cp -r website/charts/* history/$DATE/charts/
-          cp website/pdf/nasdaq_ipo_report_$DATE.pdf history/$DATE/
+          cp -r website/charts/* history/$DATE/charts/ || echo "沒有圖表需要複製"
+          cp website/pdf/nasdaq_ipo_report_$DATE.pdf history/$DATE/ || echo "沒有PDF報告需要複製"
 
       - name: 生成月度報表（如果是月初或月末）
         run: |
-          python scripts/monthly_report.py
+          python scripts/monthly_report.py || echo "月度報表生成失敗，但繼續執行"
+
+      - name: 設置Pages
+        uses: actions/configure-pages@v3
+
+      - name: 上傳網站文件
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: 'website'
 
       - name: 部署到GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.4
-        with:
-          branch: gh-pages  # 部署到的分支
-          folder: website   # 要部署的文件夾
-          clean: false      # 不清除舊文件，保留歷史記錄
+        id: deployment
+        uses: actions/deploy-pages@v2
 
       - name: 提交歷史記錄到倉庫
         run: |
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
-          git add history/
-          git add website/monthly/
+          git add history/ || echo "沒有歷史記錄需要添加"
+          git add website/monthly/ || echo "沒有月度報表需要添加"
           git commit -m "更新IPO歷史記錄和月度報表 $(date +%Y-%m-%d)" || echo "沒有變更需要提交"
-          git push
+          git push https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
