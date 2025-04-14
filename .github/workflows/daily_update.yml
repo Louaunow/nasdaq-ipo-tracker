@@ -16,8 +16,6 @@ jobs:
     steps:
       - name: 檢出代碼
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # 獲取完整歷史記錄
 
       - name: 設置Python
         uses: actions/setup-python@v4
@@ -50,17 +48,20 @@ jobs:
         run: |
           python scripts/monthly_report.py || echo "月度報表生成失敗，但繼續執行"
 
-      # 使用JamesIves的部署動作，但使用最新版本
+      # 直接使用git命令部署到gh-pages分支
       - name: 部署到GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4.4.3
-        with:
-          branch: gh-pages  # 部署到的分支
-          folder: website   # 要部署的文件夾
-          clean: false      # 不清除舊文件，保留歷史記錄
-          token: ${{ secrets.GITHUB_TOKEN }}  # 使用GitHub提供的令牌
+        run: |
+          cd website
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git init
+          git add .
+          git commit -m "部署網站更新 $(date +%Y-%m-%d)"
+          git push --force https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:gh-pages
 
       - name: 提交歷史記錄到倉庫
         run: |
+          cd ${{ github.workspace }}
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
           git add history/ || echo "沒有歷史記錄需要添加"
