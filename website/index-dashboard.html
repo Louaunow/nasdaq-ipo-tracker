@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="css/menu-button.css">
     <link rel="stylesheet" href="css/refresh-button.css">
     <link rel="stylesheet" href="css/export-button.css">
+    <link rel="stylesheet" href="css/industry_valuation_integrated.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -58,6 +60,12 @@
                     <div class="nav-section-title">資料與報告</div>
                     <ul class="nav-items">
                         <li class="nav-item">
+                            <a href="#industry-valuation" class="nav-link">
+                                <i class="fas fa-industry"></i>
+                                行業估值
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="#sec-updates" class="nav-link">
                                 <i class="fas fa-file-alt"></i>
                                 SEC規則變更
@@ -70,7 +78,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pdf/nasdaq_ipo_report_2025-04-10.pdf" class="nav-link">
+                            <a href="pdf/nasdaq_ipo_report_2025-04-14.pdf" class="nav-link">
                                 <i class="fas fa-file-pdf"></i>
                                 PDF報告
                             </a>
@@ -122,7 +130,7 @@
                     <h2 class="card-title">今日IPO概覽</h2>
                     <div class="card-actions">
                         <span class="badge badge-blue">
-                            <i class="fas fa-clock"></i> 最後更新: 2025-04-10
+                            <i class="fas fa-clock"></i> 最後更新: 2025-04-14
                         </span>
                         <button class="card-action">
                             <i class="fas fa-ellipsis-v"></i>
@@ -244,6 +252,65 @@
                 </div>
             </div>
             
+            <!-- 納斯達克行業估值表格 -->
+            <div class="dashboard-card" id="industry-valuation">
+                <div class="card-header">
+                    <h2 class="card-title">納斯達克行業估值指標</h2>
+                    <div class="card-actions">
+                        <span class="badge badge-blue">
+                            <i class="fas fa-clock"></i> 最後更新: <span id="last-updated-time">載入中...</span>
+                        </span>
+                        <button class="btn btn-secondary" id="refresh-valuation-data">
+                            <i class="fas fa-sync-alt"></i>
+                            刷新數據
+                        </button>
+                        <button class="card-action">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="industry-valuation-container">
+                        <div id="valuation-loading" class="text-center py-4">
+                            <div class="loading-spinner"></div>
+                            <span>正在載入行業估值數據...</span>
+                        </div>
+                        
+                        <div id="valuation-table-container" class="hidden">
+                            <table class="industry-valuation-table" id="industry-valuation-table">
+                                <thead>
+                                    <tr>
+                                        <th>行業</th>
+                                        <th>
+                                            <div class="metric-header">
+                                                市盈率 (PE)
+                                                <span class="info-icon" data-metric="市盈率">?</span>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="metric-header">
+                                                預期市盈率
+                                                <span class="info-icon" data-metric="市盈率">?</span>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="metric-header">
+                                                PEG比率
+                                                <span class="info-icon" data-metric="市盈率">?</span>
+                                            </div>
+                                        </th>
+                                        <th>行業特定指標</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="industry-valuation-body">
+                                    <!-- 數據將通過JavaScript動態填充 -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <!-- SEC規則變更 -->
             <div class="dashboard-card" id="sec-updates">
                 <div class="card-header">
@@ -344,9 +411,48 @@
         <i class="fas fa-moon"></i>
     </div>
     
+    <!-- 估值方法說明模態框 -->
+    <div id="valuation-modal" class="valuation-modal">
+        <div class="valuation-modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 class="valuation-modal-title" id="modal-metric-title">估值方法說明</h3>
+            
+            <div class="valuation-modal-section">
+                <h4>定義</h4>
+                <p id="modal-definition"></p>
+            </div>
+            
+            <div class="valuation-modal-section">
+                <h4>計算方法</h4>
+                <p id="modal-calculation"></p>
+            </div>
+            
+            <div class="valuation-modal-section">
+                <h4>優點</h4>
+                <ul class="pros-cons-list" id="modal-pros">
+                </ul>
+            </div>
+            
+            <div class="valuation-modal-section">
+                <h4>缺點</h4>
+                <ul class="pros-cons-list" id="modal-cons">
+                </ul>
+            </div>
+            
+            <div class="valuation-modal-section" id="industry-notes-section">
+                <h4>行業特性</h4>
+                <div id="modal-industry-notes">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/dashboard.js"></script>
     <script src="js/features.js"></script>
     <script src="js/refresh-button.js"></script>
     <script src="js/export-button.js"></script>
+    <script src="js/industry_valuation.js"></script>
 </body>
 </html>
