@@ -1,241 +1,240 @@
-/* 納斯達克行業估值表格樣式 */
+// 納斯達克行業估值表格 CSS
+// 用於設置行業估值表格的樣式，確保與主儀表板風格一致
 
-.industry-valuation-container {
-  font-family: 'Noto Sans TC', Arial, sans-serif;
-  margin: 20px 0;
-  padding: 15px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.industry-valuation-section {
+    margin: 30px 0;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .industry-valuation-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .industry-valuation-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #333;
-  margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333333;
+    margin: 0;
 }
 
-.refresh-container {
-  display: flex;
-  align-items: center;
-}
-
-.last-updated {
-  font-size: 0.85rem;
-  color: #666;
-  margin-right: 10px;
+.valuation-controls {
+    display: flex;
+    align-items: center;
 }
 
 .refresh-button {
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 5px 10px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  transition: all 0.2s ease;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
 }
 
 .refresh-button:hover {
-  background-color: #e0e0e0;
+    background-color: #45a049;
 }
 
 .refresh-button i {
-  margin-right: 5px;
+    margin-right: 5px;
 }
 
-.industry-valuation-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-  overflow-x: auto;
+.last-updated-info {
+    margin-left: 15px;
+    font-size: 0.85rem;
+    color: #666666;
 }
 
-.industry-valuation-table th,
-.industry-valuation-table td {
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+.valuation-table-container {
+    overflow-x: auto;
+    margin-top: 15px;
 }
 
-.industry-valuation-table th {
-  background-color: #f0f0f0;
-  font-weight: 600;
-  color: #333;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+.valuation-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
 }
 
-.industry-valuation-table tr:hover {
-  background-color: #f5f5f5;
+.valuation-table th {
+    background-color: #f2f2f2;
+    color: #333333;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 2px solid #dddddd;
+}
+
+.valuation-table td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #dddddd;
+    color: #333333;
+}
+
+.valuation-table tr:hover {
+    background-color: #f9f9f9;
 }
 
 .industry-name {
-  font-weight: 600;
-  color: #0066cc;
+    font-weight: 600;
+    color: #333333;
 }
 
 .metric-value {
-  font-family: 'Roboto Mono', monospace;
-  text-align: right;
+    text-align: right;
+    color: #333333;
 }
 
-.metric-header {
-  display: flex;
-  align-items: center;
+.industry-specific-metrics {
+    color: #333333;
+}
+
+.industry-specific-metrics div {
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+.metric-name {
+    margin-right: 5px;
+    color: #666666;
 }
 
 .info-icon {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  background-color: #0066cc;
-  color: white;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 16px;
-  font-size: 12px;
-  margin-left: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: #2196F3;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 16px;
+    font-size: 12px;
+    margin-left: 5px;
+    cursor: pointer;
 }
 
 .info-icon:hover {
-  background-color: #004c99;
+    background-color: #0b7dda;
 }
 
-/* 估值方法說明模態框 */
-.valuation-modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
+/* 模態框樣式 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
-.valuation-modal-content {
-  background-color: #fefefe;
-  margin: 10% auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  width: 80%;
-  max-width: 700px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 700px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .close-modal {
-  position: absolute;
-  right: 15px;
-  top: 10px;
-  font-size: 24px;
-  font-weight: bold;
-  color: #aaa;
-  cursor: pointer;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-.close-modal:hover {
-  color: #333;
+.close-modal:hover,
+.close-modal:focus {
+    color: black;
+    text-decoration: none;
 }
 
-.valuation-modal-title {
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-  color: #333;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
+.modal-title {
+    margin-top: 0;
+    color: #333333;
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 10px;
 }
 
-.valuation-modal-section {
-  margin-bottom: 15px;
+.modal-section {
+    margin: 15px 0;
 }
 
-.valuation-modal-section h4 {
-  font-size: 1.1rem;
-  color: #0066cc;
-  margin-bottom: 5px;
+.modal-section-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333333;
 }
 
-.valuation-modal-section p {
-  margin: 5px 0;
-  line-height: 1.5;
+.modal-section-content {
+    color: #333333;
 }
 
 .pros-cons-list {
-  padding-left: 20px;
-  margin: 5px 0;
-}
-
-.pros-cons-list li {
-  margin-bottom: 5px;
-  line-height: 1.4;
+    padding-left: 20px;
+    margin: 5px 0;
+    color: #333333;
 }
 
 .industry-note {
-  background-color: #f5f5f5;
-  padding: 10px;
-  border-left: 3px solid #0066cc;
-  margin-top: 10px;
+    margin: 5px 0;
+    color: #333333;
 }
 
-.industry-note-title {
-  font-weight: 600;
-  margin-bottom: 5px;
+/* 加載和錯誤提示 */
+.loading-indicator {
+    display: none;
+    text-align: center;
+    padding: 20px;
+    color: #666666;
+}
+
+.error-message {
+    display: none;
+    text-align: center;
+    padding: 10px;
+    background-color: #ffebee;
+    color: #c62828;
+    border-radius: 4px;
+    margin: 10px 0;
 }
 
 /* 響應式設計 */
 @media screen and (max-width: 768px) {
-  .industry-valuation-container {
-    padding: 10px;
-    overflow-x: auto;
-  }
-  
-  .industry-valuation-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .refresh-container {
-    margin-top: 10px;
-  }
-  
-  .valuation-modal-content {
-    width: 95%;
-    margin: 5% auto;
-  }
-}
-
-/* 加載動畫 */
-.loading-spinner {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 3px solid rgba(0, 0, 0, 0.1);
-  border-radius: 50%;
-  border-top-color: #0066cc;
-  animation: spin 1s ease-in-out infinite;
-  margin-right: 10px;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.hidden {
-  display: none;
+    .industry-valuation-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .valuation-controls {
+        margin-top: 10px;
+    }
+    
+    .valuation-table th,
+    .valuation-table td {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+    }
 }
