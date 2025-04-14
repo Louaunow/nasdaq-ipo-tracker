@@ -9,6 +9,8 @@ on:
 # 添加明確的權限設定
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
   update-ipo-info:
@@ -50,13 +52,18 @@ jobs:
         run: |
           python scripts/monthly_report.py || echo "月度報表生成失敗，但繼續執行"
 
-      - name: 部署到GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4.4.3
+      # 使用直接部署方法而不是第三方動作
+      - name: 設置Pages
+        uses: actions/configure-pages@v3
+
+      - name: 上傳Pages構建產物
+        uses: actions/upload-pages-artifact@v2
         with:
-          branch: gh-pages  # 部署到的分支
-          folder: website   # 要部署的文件夾
-          clean: false      # 不清除舊文件，保留歷史記錄
-          token: ${{ secrets.GITHUB_TOKEN }}  # 使用GitHub提供的令牌
+          path: 'website'
+
+      - name: 部署到GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
 
       - name: 提交歷史記錄到倉庫
         run: |
