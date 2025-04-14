@@ -31,39 +31,46 @@ function updateLastUpdateTimestamp() {
     localStorage.setItem('lastUpdateTimestamp', `${dateStr} ${timeStr}`);
     localStorage.setItem('lastUpdateDate', dateStr);
     localStorage.setItem('lastUpdateTime', timeStr);
+    
+    // 直接更新頁面上的時間戳
+    updateTopBarTimestamp(`${dateStr} ${timeStr}`);
+    updateOverviewTimestamp(`${dateStr} ${timeStr}`);
+    updatePdfLink(dateStr);
 }
 
 // 初始化時間戳顯示
 function initializeTimestamp() {
-    // 檢查是否有保存的時間戳
-    const savedTimestamp = localStorage.getItem('lastUpdateTimestamp');
-    const savedDate = localStorage.getItem('lastUpdateDate');
-    const savedTime = localStorage.getItem('lastUpdateTime');
+    // 獲取當前日期作為默認值
+    const now = new Date();
+    const currentDateStr = now.getFullYear() + '-' + 
+                          String(now.getMonth() + 1).padStart(2, '0') + '-' + 
+                          String(now.getDate()).padStart(2, '0');
+    const currentTimeStr = String(now.getHours()).padStart(2, '0') + ':' + 
+                          String(now.getMinutes()).padStart(2, '0');
     
-    if (savedTimestamp) {
-        // 更新右上角的時間戳顯示
-        updateTopBarTimestamp(savedTimestamp);
+    // 檢查是否有保存的時間戳
+    let savedTimestamp = localStorage.getItem('lastUpdateTimestamp');
+    let savedDate = localStorage.getItem('lastUpdateDate');
+    
+    // 如果沒有保存的時間戳或日期不是今天，則使用當前日期時間
+    if (!savedTimestamp || !savedDate || savedDate !== currentDateStr) {
+        savedTimestamp = `${currentDateStr} ${currentTimeStr}`;
+        savedDate = currentDateStr;
         
-        // 更新今日IPO概覽中的時間戳
-        updateOverviewTimestamp(savedTimestamp);
-    } else {
-        // 如果沒有保存的時間戳，則創建一個新的
-        const now = new Date();
-        const dateStr = now.getFullYear() + '-' + 
-                       String(now.getMonth() + 1).padStart(2, '0') + '-' + 
-                       String(now.getDate()).padStart(2, '0');
-        const timeStr = String(now.getHours()).padStart(2, '0') + ':' + 
-                       String(now.getMinutes()).padStart(2, '0');
-        
-        // 保存時間戳
-        localStorage.setItem('lastUpdateTimestamp', `${dateStr} ${timeStr}`);
-        localStorage.setItem('lastUpdateDate', dateStr);
-        localStorage.setItem('lastUpdateTime', timeStr);
-        
-        // 更新顯示
-        updateTopBarTimestamp(`${dateStr} ${timeStr}`);
-        updateOverviewTimestamp(`${dateStr} ${timeStr}`);
+        // 保存新的時間戳
+        localStorage.setItem('lastUpdateTimestamp', savedTimestamp);
+        localStorage.setItem('lastUpdateDate', savedDate);
+        localStorage.setItem('lastUpdateTime', currentTimeStr);
     }
+    
+    // 更新右上角的時間戳顯示
+    updateTopBarTimestamp(savedTimestamp);
+    
+    // 更新今日IPO概覽中的時間戳
+    updateOverviewTimestamp(savedTimestamp);
+    
+    // 更新PDF報告鏈接
+    updatePdfLink(savedDate);
 }
 
 // 更新右上角的時間戳
@@ -85,12 +92,23 @@ function updateTopBarTimestamp(timestamp) {
 // 更新今日IPO概覽中的時間戳
 function updateOverviewTimestamp(timestamp) {
     // 查找今日IPO概覽卡片中的時間戳
-    const overviewCard = document.querySelector('.dashboard-card');
-    if (overviewCard) {
+    const overviewCards = document.querySelectorAll('.dashboard-card');
+    if (overviewCards && overviewCards.length > 0) {
+        // 查找第一個卡片（今日IPO概覽）
+        const overviewCard = overviewCards[0];
         const badgeBlue = overviewCard.querySelector('.badge.badge-blue');
         if (badgeBlue) {
             badgeBlue.innerHTML = `<i class="fas fa-clock"></i> 最後更新: ${timestamp}`;
         }
+    }
+}
+
+// 更新PDF報告鏈接
+function updatePdfLink(dateStr) {
+    // 查找側邊欄中的PDF報告鏈接
+    const pdfLink = document.querySelector('a.nav-link i.fa-file-pdf')?.parentElement;
+    if (pdfLink) {
+        pdfLink.href = `pdf/nasdaq_ipo_report_${dateStr}.pdf`;
     }
 }
 
