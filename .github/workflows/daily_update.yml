@@ -1,70 +1,68 @@
-name: 每日更新納斯達克IPO資訊
+name: 每日更新納斯達克IPO資訊與行業估值數據
 
 on:
   schedule:
-    # 每天香港時間上午10:00運行（UTC+8，即UTC 02:00）
-    - cron: '0 2 * * *'
+    - cron: '0 2 * * *'  # 每天UTC時間2:00運行（香港時間10:00）
   workflow_dispatch:  # 允許手動觸發
 
-# 添加明確的權限設定
-permissions:
-  contents: write
-
 jobs:
-  update-ipo-info:
+  update-data:
     runs-on: ubuntu-latest
     steps:
       - name: 檢出代碼
         uses: actions/checkout@v3
-
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # 確保我們獲取的是最新的main分支，以便後續pull操作
+          ref: 'main'
+      
       - name: 設置Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-
+      
       - name: 安裝依賴
         run: |
           python -m pip install --upgrade pip
-          pip install requests beautifulsoup4 pandas matplotlib reportlab
-
-      - name: 收集IPO資訊並生成報告
+          pip install pandas numpy requests matplotlib seaborn plotly beautifulsoup4 lxml
+      
+      - name: 更新納斯達克IPO數據
+        id: update_ipo_info # 給這個步驟一個id，方便日誌中識別
         run: |
-          python scripts/generate_pdf_report.py || echo "報告生成失敗，但繼續執行"
-
-      - name: 儲存每日資訊
+          cd scripts
+          python fetch_ipo_data.py
+          python generate_charts.py
+          python generate_pdf_report.py
+      
+      - name: 更新行業估值數據
+        id: update_valuation_data # 給這個步驟一個id
         run: |
-          # 創建歷史目錄（如果不存在）
-          mkdir -p history
-          # 獲取當前日期
-          DATE=$(date +%Y-%m-%d)
-          # 創建日期目錄
-          mkdir -p history/$DATE
-          mkdir -p history/$DATE/charts
-          # 複製今日生成的文件到歷史目錄
-          cp -r website/charts/* history/$DATE/charts/ || echo "沒有圖表需要複製"
-          cp website/pdf/nasdaq_ipo_report_$DATE.pdf history/$DATE/ || echo "沒有PDF報告需要複製"
-
-      - name: 生成月度報表（如果是月初或月末）
+          cd scripts/industry_valuation
+          python fetch_industry_data.py
+      
+      - name: 配置Git
         run: |
-          python scripts/monthly_report.py || echo "月度報表生成失敗，但繼續執行"
-
-      # 直接使用git命令部署到gh-pages分支
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+      
+      - name: 提交更新的數據
+        run: |
+          # 拉取遠程更改以避免衝突
+          # 我們假設目標分支是 main，如果不是，需要相應修改
+          git pull origin main --rebase
+          git add website/data/ website/charts/ website/pdf/
+          # 檢查是否有變更需要提交
+          if ! git diff --staged --quiet; then
+            git commit -m "每日更新納斯達克IPO數據與行業估值數據 $(date +'%Y-%m-%d')"
+            git push
+          else
+            echo "沒有變更需要提交"
+          fi
+      
       - name: 部署到GitHub Pages
-        run: |
-          cd website
-          git config --global user.name 'GitHub Actions'
-          git config --global user.email 'actions@github.com'
-          git init
-          git add .
-          git commit -m "部署網站更新 $(date +%Y-%m-%d)"
-          git push --force https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:gh-pages
+        uses: JamesIves/github-pages-deploy-action@v4.4.3
+        with:
+          branch: gh-pages # 部署到gh-pages分支
+          folder: website # 要部署的文件夾
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 提交歷史記錄到倉庫
-        run: |
-          cd ${{ github.workspace }}
-          git config --global user.name 'GitHub Actions'
-          git config --global user.email 'actions@github.com'
-          git add history/ || echo "沒有歷史記錄需要添加"
-          git add website/monthly/ || echo "沒有月度報表需要添加"
-          git commit -m "更新IPO歷史記錄和月度報表 $(date +%Y-%m-%d)" || echo "沒有變更需要提交"
-          git push https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
