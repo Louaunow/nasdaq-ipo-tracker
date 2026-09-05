@@ -1,0 +1,132 @@
+{
+  "科技": {
+    "symbol": "XLK",
+    "description": "包含軟件、硬件、半導體、IT服務等科技公司",
+    "metrics": {
+      "PE": 22.94,
+      "Forward_PE": 20.47,
+      "PEG": 1.62,
+      "PS": 6.45,
+      "EV/EBITDA": 17.49,
+      "RD_Revenue": 20.38
+    },
+    "last_updated": "2025-04-14 04:17:04"
+  },
+  "金融": {
+    "symbol": "XLF",
+    "description": "包含銀行、保險、資產管理等金融服務公司",
+    "metrics": {
+      "PE": 19.19,
+      "Forward_PE": 17.83,
+      "PEG": 2.11,
+      "PB": 2.49,
+      "Dividend_Yield": 2.15,
+      "Capital_Adequacy": 16.51
+    },
+    "last_updated": "2025-04-14 04:17:05"
+  },
+  "醫療保健": {
+    "symbol": "XLV",
+    "description": "包含製藥、生物科技、醫療設備、醫療服務等公司",
+    "metrics": {
+      "PE": 26.89,
+      "Forward_PE": 12.58,
+      "PEG": 2.45,
+      "PS": 4.62,
+      "EV/EBITDA": 14.47,
+      "Pipeline_Value": 7270000000.0
+    },
+    "last_updated": "2025-04-14 04:17:06"
+  },
+  "消費者服務": {
+    "symbol": "XLC",
+    "description": "包含媒體、娛樂、電信等消費者服務公司",
+    "metrics": {
+      "PE": 15.8,
+      "Forward_PE": 18.52,
+      "PEG": 2.49,
+      "PS": 7.43,
+      "Same_Store_Growth": 5.97,
+      "Customer_Acquisition_Cost": 309.33
+    },
+    "last_updated": "2025-04-14 04:17:07"
+  },
+  "消費品": {
+    "symbol": "XLP",
+    "description": "包含食品、飲料、家庭用品等必需消費品公司",
+    "metrics": {
+      "PE": 23.91,
+      "Forward_PE": 22.94,
+      "PEG": 2.42,
+      "PS": 1.31,
+      "Brand_Value": 54140000000.0,
+      "Inventory_Turnover": 6.33
+    },
+    "last_updated": "2025-04-14 04:17:08"
+  },
+  "工業": {
+    "symbol": "XLI",
+    "description": "包含航空、國防、建築、機械等工業公司",
+    "metrics": {
+      "PE": 15.08,
+      "Forward_PE": 16.44,
+      "PEG": 2.4,
+      "EV/EBITDA": 18.3,
+      "ROCE": 8.54,
+      "Backlog_Ratio": 0.61
+    },
+    "last_updated": "2025-04-14 04:17:09"
+  },
+  "基礎材料": {
+    "symbol": "XLB",
+    "description": "包含化工、金屬、礦業等基礎材料公司",
+    "metrics": {
+      "PE": 22.46,
+      "Forward_PE": 16.1,
+      "PEG": 1.98,
+      "EV/EBITDA": 8.35,
+      "Commodity_Sensitivity": 0.51,
+      "ROA": 6.53
+    },
+    "last_updated": "2025-04-14 04:17:09"
+  },
+  "能源": {
+    "symbol": "XLE",
+    "description": "包含石油、天然氣、能源設備等能源公司",
+    "metrics": {
+      "PE": 22.7,
+      "Forward_PE": 18.71,
+      "PEG": 0.86,
+      "Reserve_Replacement": 89.3,
+      "EV_Proven_Reserves": 21.69,
+      "FCF_Yield": 8.79
+    },
+    "last_updated": "2025-04-14 04:17:10"
+  },
+  "電信服務": {
+    "symbol": "VOX",
+    "description": "包含電信、無線通訊等電信服務公司",
+    "metrics": {
+      "PE": 28.67,
+      "Forward_PE": 17.98,
+      "PEG": 1.46,
+      "EV_Subscriber": 830.23,
+      "Churn_Rate": 1.23,
+      "ARPU": 58.26
+    },
+    "last_updated": "2025-04-14 04:17:11"
+  },
+  "公用事業": {
+    "symbol": "XLU",
+    "description": "包含電力、天然氣、水務等公用事業公司",
+    "metrics": {
+      "PE": 16.71,
+      "Forward_PE": 17.09,
+      "PEG": 2.4,
+      "Dividend_Yield": 4.76,
+      "Regulated_Asset_Base": 9630000000.0,
+      "Debt_EBITDA": 1.65
+    },
+    "last_updated": "2025-04-14 04:17:12"
+  }
+}
