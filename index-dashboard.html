@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>納斯達克IPO追蹤儀表板</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/menu-button.css">
+    <link rel="stylesheet" href="css/industry_valuation.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="images/nasdaq-logo.png" alt="納斯達克標誌">
+                <h1>納斯達克IPO追蹤</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#overview"><i class="icon-dashboard"></i>IPO概覽</a></li>
+                    <li><a href="#recent-ipos"><i class="icon-list"></i>最新IPO詳情</a></li>
+                    <li><a href="#industry-valuation"><i class="icon-chart"></i>行業估值</a></li>
+                    <li><a href="#sec-rules"><i class="icon-rules"></i>SEC規則變更</a></li>
+                    <li><a href="daily-dashboard.html"><i class="icon-calendar"></i>今日更新</a></li>
+                    <li><a href="pdf/nasdaq_ipo_report_2025-04-14.pdf" target="_blank"><i class="icon-pdf"></i>PDF報告</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p>最後更新: <span id="last-updated-time">2025-04-14 06:51</span></p>
+                <button id="refresh-button" class="refresh-btn">刷新數據</button>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="menu-button-container">
+                <button class="menu-button" id="menu-toggle">
+                    <div class="menu-icon"></div>
+                </button>
+            </div>
+            
+            <section id="overview" class="dashboard-section">
+                <h2>今日IPO概覽</h2>
+                <div class="metrics-container">
+                    <div class="metric-card">
+                        <h3>今日IPO數量</h3>
+                        <p class="metric-value">3</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>總募資金額</h3>
+                        <p class="metric-value">$389.7M</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>平均IPO價格</h3>
+                        <p class="metric-value">$18.5</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>本月IPO總數</h3>
+                        <p class="metric-value">12</p>
+                    </div>
+                </div>
+                
+                <div class="charts-container">
+                    <div class="chart-card">
+                        <h3>IPO行業分佈</h3>
+                        <div class="chart-container">
+                            <canvas id="industry-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>IPO表現趨勢</h3>
+                        <div class="chart-container">
+                            <canvas id="performance-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="recent-ipos" class="dashboard-section">
+                <h2>最新IPO詳情</h2>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>公司名稱</th>
+                                <th>股票代碼</th>
+                                <th>行業</th>
+                                <th>發行價</th>
+                                <th>募資金額</th>
+                                <th>上市日期</th>
+                                <th>首日漲跌幅</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>TechVision AI</td>
+                                <td>TVAI</td>
+                                <td>科技</td>
+                                <td>$22.00</td>
+                                <td>$187.5M</td>
+                                <td>2025-04-14</td>
+                                <td class="positive">+12.4%</td>
+                            </tr>
+                            <tr>
+                                <td>GreenEnergy Solutions</td>
+                                <td>GRNS</td>
+                                <td>能源</td>
+                                <td>$18.50</td>
+                                <td>$142.2M</td>
+                                <td>2025-04-14</td>
+                                <td class="positive">+8.7%</td>
+                            </tr>
+                            <tr>
+                                <td>MediHealth Innovations</td>
+                                <td>MDHI</td>
+                                <td>醫療保健</td>
+                                <td>$15.00</td>
+                                <td>$60.0M</td>
+                                <td>2025-04-14</td>
+                                <td class="negative">-2.3%</td>
+                            </tr>
+                            <tr>
+                                <td>QuantumCompute</td>
+                                <td>QCPU</td>
+                                <td>科技</td>
+                                <td>$25.00</td>
+                                <td>$210.5M</td>
+                                <td>2025-04-13</td>
+                                <td class="positive">+18.2%</td>
+                            </tr>
+                            <tr>
+                                <td>Urban Mobility</td>
+                                <td>UMO</td>
+                                <td>交通</td>
+                                <td>$19.75</td>
+                                <td>$95.3M</td>
+                                <td>2025-04-13</td>
+                                <td class="positive">+5.1%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- 納斯達克行業估值表格部分 -->
+            <section id="industry-valuation" class="dashboard-section industry-valuation-section">
+                <div class="industry-valuation-header">
+                    <h2 class="industry-valuation-title">納斯達克行業估值表格</h2>
+                    <div class="valuation-controls">
+                        <button id="refresh-valuation-data" class="refresh-button">
+                            <i class="icon-refresh"></i>刷新數據
+                        </button>
+                        <div class="last-updated-info">
+                            最後更新: <span id="valuation-last-updated">2025-04-14 04:17:04</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="valuation-loading" class="loading-indicator">
+                    加載中...
+                </div>
+                
+                <div id="valuation-error" class="error-message"></div>
+                
+                <div id="valuation-table-container" class="valuation-table-container">
+                    <table class="valuation-table">
+                        <thead>
+                            <tr>
+                                <th>行業</th>
+                                <th>市盈率 (PE) <span class="info-icon" data-metric="市盈率">?</span></th>
+                                <th>預期市盈率 <span class="info-icon" data-metric="預期市盈率">?</span></th>
+                                <th>PEG比率 <span class="info-icon" data-metric="PEG比率">?</span></th>
+                                <th>行業特定指標</th>
+                            </tr>
+                        </thead>
+                        <tbody id="industry-valuation-body">
+                            <!-- 表格內容將由JavaScript動態生成 -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- 估值方法說明模態框 -->
+                <div id="valuation-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <h3 id="valuation-modal-title" class="modal-title">估值方法說明</h3>
+                        
+                        <div class="modal-section">
+                            <div class="modal-section-title">定義</div>
+                            <div id="valuation-definition" class="modal-section-content"></div>
+                        </div>
+                        
+                        <div class="modal-section">
+                            <div class="modal-section-title">計算方法</div>
+                            <div id="valuation-calculation" class="modal-section-content"></div>
+                        </div>
+                        
+                        <div class="modal-section">
+                            <div class="modal-section-title">優點</div>
+                            <ul id="valuation-pros" class="pros-cons-list"></ul>
+                        </div>
+                        
+                        <div class="modal-section">
+                            <div class="modal-section-title">缺點</div>
+                            <ul id="valuation-cons" class="pros-cons-list"></ul>
+                        </div>
+                        
+                        <div class="modal-section">
+                            <div class="modal-section-title">行業應用說明</div>
+                            <div id="valuation-industry-notes" class="modal-section-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="sec-rules" class="dashboard-section">
+                <h2>SEC規則變更</h2>
+                <div class="rules-container">
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <h3>新規則</h3>
+                            <span class="rule-date">2025-04-08</span>
+                        </div>
+                        <h4>IPO定價透明度要求</h4>
+                        <p>SEC發布新規則，要求承銷商提供更詳細的IPO定價方法說明，增加定價過程透明度。該規則將於2025年7月1日生效，適用於所有新的IPO申請。</p>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-header">
+                            <h3>提議規則</h3>
+                            <span class="rule-date">2025-04-05</span>
+                        </div>
+                        <h4>SPAC併購披露增強</h4>
+                        <p>SEC提議增強SPAC併購交易的披露要求，包括更詳細的財務預測和風險因素。該提議目前處於公眾評論期，預計將於2025年第三季度最終確定。</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <script src="js/dashboard.js"></script>
+    <script src="js/menu-button.js"></script>
+    <script src="js/refresh-button.js"></script>
+    <script src="js/industry_valuation.js"></script>
+</body>
+</html>
