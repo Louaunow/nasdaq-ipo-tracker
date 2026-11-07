@@ -1,0 +1,721 @@
+/* Tesla-inspired CSS for NASDAQ IPO Website */
+
+/* Base Styles and Typography */
+@import url('https://fonts.googleapis.com/css2?family=Gotham:wght@300;400;500;700&display=swap');
+
+:root {
+    --tesla-black: #171a20;
+    --tesla-white: #ffffff;
+    --tesla-gray: #393c41;
+    --tesla-light-gray: #f4f4f4;
+    --tesla-red: #e82127;
+    --tesla-blue: #3e6ae1;
+    --tesla-green: #12bb00;
+    --animation-speed: 0.5s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y proximity;
+}
+
+body {
+    font-family: 'Gotham', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    color: var(--tesla-white);
+    background-color: var(--tesla-black);
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+/* Section Styling */
+section {
+    scroll-snap-align: start;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 24px;
+}
+
+section.half-height {
+    min-height: 50vh;
+    padding: 60px 24px;
+}
+
+.section-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.section-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    z-index: 1;
+}
+
+/* Header and Navigation */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    transition: background-color 0.3s ease;
+}
+
+header.scrolled {
+    background-color: var(--tesla-black);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--tesla-white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.logo i {
+    margin-right: 10px;
+    color: var(--tesla-red);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 30px;
+}
+
+nav ul li a {
+    color: var(--tesla-white);
+    text-decoration: none;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--tesla-red);
+}
+
+/* Mobile Navigation */
+.mobile-nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--tesla-white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 101;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    color: var(--tesla-white);
+    background-color: var(--tesla-black);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 150px 0 80px;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    margin-top: auto;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 12px 40px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--tesla-white);
+    color: var(--tesla-black);
+}
+
+.btn-primary:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.btn-secondary {
+    background-color: rgba(23, 26, 32, 0.8);
+    color: var(--tesla-white);
+    border: 2px solid var(--tesla-white);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--tesla-white);
+    border: 2px solid var(--tesla-white);
+    padding: 10px 20px;
+    font-size: 0.8rem;
+}
+
+.btn-outline:hover {
+    background-color: var(--tesla-white);
+    color: var(--tesla-black);
+}
+
+.btn-download {
+    background-color: var(--tesla-red);
+    color: var(--tesla-white);
+}
+
+.btn-download:hover {
+    background-color: #d41c21;
+}
+
+/* IPO Section */
+.ipo-section {
+    background-color: var(--tesla-black);
+    padding: 100px 0;
+    min-height: auto;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+    color: var(--tesla-white);
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 60px;
+    color: var(--tesla-gray);
+}
+
+/* Tables */
+.table-container {
+    overflow-x: auto;
+    margin-bottom: 60px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+table th {
+    font-weight: 500;
+    color: var(--tesla-white);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+table tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Cards */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: var(--tesla-white);
+}
+
+.card-subtitle {
+    font-size: 0.9rem;
+    color: var(--tesla-gray);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-footer {
+    padding: 15px 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Charts Section */
+.charts-section {
+    background-color: var(--tesla-black);
+    padding: 100px 0;
+    min-height: auto;
+}
+
+.chart-container {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    padding: 30px;
+}
+
+.chart-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: var(--tesla-white);
+}
+
+.chart-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+}
+
+/* Performance Section */
+.performance-section {
+    background-color: var(--tesla-black);
+    padding: 100px 0;
+    min-height: auto;
+}
+
+.performance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.performance-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.performance-card:hover {
+    transform: translateY(-5px);
+}
+
+.performance-header {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--tesla-white);
+}
+
+.performance-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.performance-subtitle {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.performance-body {
+    padding: 20px;
+}
+
+.performance-stat {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.performance-label {
+    font-size: 0.9rem;
+    color: var(--tesla-gray);
+}
+
+.performance-value {
+    font-weight: 500;
+    color: var(--tesla-white);
+}
+
+.performance-value.positive {
+    color: var(--tesla-green);
+}
+
+.performance-value.negative {
+    color: var(--tesla-red);
+}
+
+/* Footer */
+footer {
+    background-color: var(--tesla-black);
+    color: var(--tesla-white);
+    padding: 60px 0;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.footer-links a {
+    color: var(--tesla-white);
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+}
+
+.footer-copyright {
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+/* Animations */
+.fade-in {
+    animation: fadeIn var(--animation-speed) ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .section-content {
+        width: 90%;
+    }
+    
+    .hero-title {
+        font-size: 3.2rem;
+    }
+    
+    .section-title {
+        font-size: 2.3rem;
+    }
+    
+    .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 1024px) {
+    section {
+        padding: 60px 20px;
+    }
+    
+    .hero-title {
+        font-size: 2.8rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+    
+    .performance-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+    }
+    
+    nav ul {
+        display: none;
+    }
+    
+    .mobile-nav-toggle {
+        display: block;
+    }
+    
+    nav.mobile-nav-active ul {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--tesla-black);
+        padding-top: 80px;
+        align-items: center;
+        z-index: 99;
+    }
+    
+    nav.mobile-nav-active ul li {
+        margin: 15px 0;
+    }
+    
+    .hero-content {
+        padding: 120px 0 60px;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+        gap: 10px;
+    }
+    
+    .btn {
+        width: 100%;
+        padding: 12px 20px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+        margin-bottom: 40px;
+    }
+    
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .performance-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .footer-links a {
+        margin: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    section {
+        padding: 50px 15px;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    table th, table td {
+        padding: 12px 10px;
+        font-size: 0.9rem;
+    }
+    
+    .card-header, .card-body, .card-footer {
+        padding: 15px;
+    }
+    
+    .card-title {
+        font-size: 1.1rem;
+    }
+    
+    .chart-container {
+        padding: 20px;
+    }
+    
+    .chart-title {
+        font-size: 1.3rem;
+    }
+    
+    .performance-header, .performance-body {
+        padding: 15px;
+    }
+    
+    .performance-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+    .card:hover, .performance-card:hover {
+        transform: none;
+    }
+    
+    .btn:active {
+        transform: scale(0.98);
+    }
+}
+
+/* Print Styles */
+@media print {
+    body {
+        color: black;
+        background-color: white;
+    }
+    
+    header, footer, .hero-buttons, .btn {
+        display: none;
+    }
+    
+    section {
+        padding: 20px 0;
+        min-height: auto;
+        page-break-inside: avoid;
+    }
+    
+    .section-title, .card-title, .chart-title, .performance-title {
+        color: black;
+    }
+    
+    .card, .chart-container, .performance-card, .table-container {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+    
+    table th, table td {
+        border-bottom: 1px solid #ddd;
+    }
+}
