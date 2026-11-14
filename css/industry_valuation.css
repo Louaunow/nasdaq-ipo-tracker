@@ -1,0 +1,240 @@
+// 納斯達克行業估值表格 CSS
+// 用於設置行業估值表格的樣式，確保與主儀表板風格一致
+
+.industry-valuation-section {
+    margin: 30px 0;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.industry-valuation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.industry-valuation-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333333;
+    margin: 0;
+}
+
+.valuation-controls {
+    display: flex;
+    align-items: center;
+}
+
+.refresh-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.refresh-button:hover {
+    background-color: #45a049;
+}
+
+.refresh-button i {
+    margin-right: 5px;
+}
+
+.last-updated-info {
+    margin-left: 15px;
+    font-size: 0.85rem;
+    color: #666666;
+}
+
+.valuation-table-container {
+    overflow-x: auto;
+    margin-top: 15px;
+}
+
+.valuation-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.valuation-table th {
+    background-color: #f2f2f2;
+    color: #333333;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 2px solid #dddddd;
+}
+
+.valuation-table td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #dddddd;
+    color: #333333;
+}
+
+.valuation-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+.industry-name {
+    font-weight: 600;
+    color: #333333;
+}
+
+.metric-value {
+    text-align: right;
+    color: #333333;
+}
+
+.industry-specific-metrics {
+    color: #333333;
+}
+
+.industry-specific-metrics div {
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+.metric-name {
+    margin-right: 5px;
+    color: #666666;
+}
+
+.info-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: #2196F3;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 16px;
+    font-size: 12px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.info-icon:hover {
+    background-color: #0b7dda;
+}
+
+/* 模態框樣式 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 700px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.modal-title {
+    margin-top: 0;
+    color: #333333;
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 10px;
+}
+
+.modal-section {
+    margin: 15px 0;
+}
+
+.modal-section-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333333;
+}
+
+.modal-section-content {
+    color: #333333;
+}
+
+.pros-cons-list {
+    padding-left: 20px;
+    margin: 5px 0;
+    color: #333333;
+}
+
+.industry-note {
+    margin: 5px 0;
+    color: #333333;
+}
+
+/* 加載和錯誤提示 */
+.loading-indicator {
+    display: none;
+    text-align: center;
+    padding: 20px;
+    color: #666666;
+}
+
+.error-message {
+    display: none;
+    text-align: center;
+    padding: 10px;
+    background-color: #ffebee;
+    color: #c62828;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+/* 響應式設計 */
+@media screen and (max-width: 768px) {
+    .industry-valuation-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .valuation-controls {
+        margin-top: 10px;
+    }
+    
+    .valuation-table th,
+    .valuation-table td {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+    }
+}
